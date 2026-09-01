@@ -1,0 +1,35 @@
+{
+  "name": "microc-language",
+  "displayName": "MicroC",
+  "description": "TextMate grammar for the MicroC programming language",
+  "version": "0.1.0",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "microc",
+        "aliases": [
+          "MicroC",
+          "microc"
+        ],
+        "extensions": [
+          ".mc"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "microc",
+        "scopeName": "source.microc",
+        "path": "./syntaxes/microc.tmLanguage.json"
+      }
+    ]
+  }
+}
