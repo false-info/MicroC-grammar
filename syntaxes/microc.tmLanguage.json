@@ -1,0 +1,169 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "MicroC",
+  "scopeName": "source.microc",
+  "fileTypes": [
+    "mc"
+  ],
+  "patterns": [
+    {
+      "include": "#asm"
+    },
+    {
+      "include": "#head"
+    },
+    {
+      "include": "#functions"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#types"
+    },
+    {
+      "include": "#builtins"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#numbers"
+    },
+    {
+      "include": "#operators"
+    }
+  ],
+  "repository": {
+    "head": {
+      "patterns": [
+        {
+          "name": "keyword.other.head.microc",
+          "match": "\\bhead\\b"
+        },
+        {
+          "name": "support.constant.language.feature.microc",
+          "match": "\\b(?:custom|asm-x86-64)\\b"
+        }
+      ]
+    },
+
+    "functions": {
+      "patterns": [
+        {
+          "match": "\\b(fn)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": {
+              "name": "storage.type.function.microc"
+            },
+            "2": {
+              "name": "entity.name.function.microc"
+            }
+          }
+        }
+      ]
+    },
+
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.microc",
+          "match": "\\b(?:if|else|while|return)\\b"
+        }
+      ]
+    },
+
+    "types": {
+      "patterns": [
+        {
+          "name": "storage.type.microc",
+          "match": "\\b(?:I8|I16|I32|I64|U8|U16|U32|U64|F64|Bool)\\b"
+        }
+      ]
+    },
+
+    "builtins": {
+      "patterns": [
+        {
+          "name": "support.function.builtin.microc",
+          "match": "\\b(?:pin|mem_read8|mem_read16|mem_read32|mem_read64|mem_write8|mem_write16|mem_write32|mem_write64)\\b"
+        }
+      ]
+    },
+
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.microc",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.microc",
+              "match": "\\\\(?:n|r|t|0|\\\\|\\\")"
+            },
+            {
+              "name": "constant.other.placeholder.microc",
+              "match": "%(?:I8|I16|I32|I64|U8|U16|U32|U64|F64|c|s|%)"
+            }
+          ]
+        }
+      ]
+    },
+
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.hex.microc",
+          "match": "\\b0[xX][0-9A-Fa-f]+\\b"
+        },
+        {
+          "name": "constant.numeric.float.microc",
+          "match": "\\b[0-9]+\\.[0-9]+\\b"
+        },
+        {
+          "name": "constant.numeric.integer.microc",
+          "match": "\\b[0-9]+\\b"
+        }
+      ]
+    },
+
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.microc",
+          "match": "==|!=|<=|>=|\\+|-|\\*|/|%|=|<|>"
+        }
+      ]
+    },
+
+    "asm": {
+      "name": "meta.embedded.block.assembly.microc",
+      "begin": "\\(asmb\\)\\s*\\{",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.control.asm.begin.microc"
+        }
+      },
+      "end": "\\}\\s*\\(asme\\)",
+      "endCaptures": {
+        "0": {
+          "name": "keyword.control.asm.end.microc"
+        }
+      },
+      "patterns": [
+        {
+          "name": "keyword.other.instruction.asm.microc",
+          "match": "\\b(?:mov|lea|push|pop|call|ret|jmp|je|jne|jz|jnz|cmp|test|add|sub|mul|imul|div|idiv|xor|and|or|not|shl|shr|inc|dec|cli|sti|hlt|nop)\\b"
+        },
+        {
+          "name": "variable.language.register.asm.microc",
+          "match": "\\b(?:rax|rbx|rcx|rdx|rsi|rdi|rbp|rsp|rip|r8|r9|r10|r11|r12|r13|r14|r15|eax|ebx|ecx|edx|esi|edi|ebp|esp|ax|bx|cx|dx|al|bl|cl|dl)\\b"
+        },
+        {
+          "include": "#numbers"
+        }
+      ]
+    }
+  }
+}
